@@ -38,12 +38,18 @@ const DOMAINS = {
 const LiquidImage = ({ src, alt, className = "", overlay = true }: { src: string, alt: string, className?: string, overlay?: boolean }) => {
   const filterId = useId().replace(/:/g, "");
 
+  // Safari clips CSS filter output to the element bounding box even with overflow:visible.
+  // Fix: apply the filter to a buffer div that extends 24px beyond the visible area,
+  // then clip with overflow:hidden on the outer wrapper. Displaced edge pixels come
+  // from the extra image content in the buffer zone, not from empty space.
+  const BUFFER = 24; // px — must be > feDisplacementMap scale/2 (scale=20 → ±10px)
+
   return (
-    <div className={`relative overflow-visible ${className}`}>
+    <div className={`relative overflow-hidden ${className}`}>
       <svg className="absolute w-0 h-0">
         <filter
           id={`liquid-${filterId}`}
-          x="-20%" y="-20%" width="140%" height="140%"
+          x="0%" y="0%" width="100%" height="100%"
           filterUnits="objectBoundingBox"
         >
           <feTurbulence type="fractalNoise" baseFrequency="0.003 0.003" numOctaves="1" result="warp">
@@ -65,7 +71,15 @@ const LiquidImage = ({ src, alt, className = "", overlay = true }: { src: string
           />
         </filter>
       </svg>
-      <div className="absolute inset-0" style={{ filter: `url(#liquid-${filterId})` }}>
+      {/* Buffer wrapper: extends BUFFER px beyond visible area so displaced
+          edge pixels draw from real image content, not empty space */}
+      <div
+        className="absolute"
+        style={{
+          inset: `-${BUFFER}px`,
+          filter: `url(#liquid-${filterId})`,
+        }}
+      >
         <img
           src={src}
           alt={alt}
