@@ -1,0 +1,338 @@
+import type { Lang } from './translations';
+import type { DomainKey } from './domains';
+
+export type Release = {
+  title: string;
+  domain: DomainKey;
+  subtitle: string;
+  date: string;
+  status: 'active' | 'coming-soon' | 'locked';
+  thesis: string;
+  points: { label: string; text: string }[];
+  cta?: string;
+  prerequisite?: string | null;
+};
+
+export const getReleases = (lang: Lang): Release[] => lang === 'it' ? [
+  {
+    title: 'ALTER',
+    domain: 'work',
+    subtitle: 'Gemello Digitale Operativo',
+    date: 'ATTIVO',
+    status: 'active',
+    thesis: "L'unità fondamentale dell'organizzazione non è il ruolo. È il compito cognitivo.",
+    points: [
+      { label: 'Reality Mapping', text: 'Mappa i flussi di lavoro reali, i compiti atomizzati (10–15 min), le dipendenze e i punti decisionali. Separa il lavoro effettivo dalla narrativa organizzativa.' },
+      { label: 'Ontologia dei Compiti', text: 'Classifica ogni compito per assi cognitivi: ripetitività, carico decisionale, intensità relazionale, creatività. Questa è la proprietà intellettuale difendibile.' },
+      { label: 'Motore di Delegabilità', text: "Valuta quale componente cognitiva è sostituibile, a quale costo e rischio. Espone le inefficienze storiche. Protegge il management da decisioni tecnologiche errate." },
+      { label: 'Ricomposizione del Flusso', text: 'Smantella i flussi in compiti atomici e li riassegna (umano, AI, ibrido). Output: un nuovo Modello Operativo e un Piano di Transizione da 12–36 mesi.' },
+    ],
+    cta: 'Scopri Come Funziona',
+    prerequisite: null,
+  },
+  {
+    title: 'FRICTION INDEX',
+    domain: 'work',
+    subtitle: 'Mappa della Perdita di Energia Cognitiva',
+    date: 'Q3 2026',
+    status: 'coming-soon',
+    thesis: "Dove il lavoro si inceppa, l'energia si disperde e le persone compensano con lo stress — questo è misurabile.",
+    points: [
+      { label: 'Rilevazione delle Frizioni', text: 'Identifica dove il lavoro si rompe: passaggi ripetuti, ambiguità irrisolte, sovraccarico compensativo.' },
+      { label: 'Mappa della Perdita di Energia', text: "Quantifica l'energia cognitiva persa per frizione non produttiva. Rende visibile il costo invisibile del malfunzionamento." },
+    ],
+    prerequisite: 'ALTER ha mappato il flusso di lavoro reale. Il Friction Index rivela dove distrugge silenziosamente valore.',
+  },
+  {
+    title: 'TIME GOVERNANCE SYSTEM',
+    domain: 'time',
+    subtitle: 'Allocazione della Qualità del Tempo',
+    date: 'Q1 2027',
+    status: 'locked',
+    thesis: 'Non tutto il tempo lavorativo è uguale. Governare il tempo come risorsa primaria è la prossima frontiera.',
+    points: [
+      { label: 'Allocazione del Tempo', text: "Ridistribuisce il tempo per qualità dell'output cognitivo, non per ruolo o anzianità." },
+      { label: 'Protezione Rigenerativa', text: 'Riduce strutturalmente il tempo non convertibile e protegge la capacità rigenerativa dall\'erosione.' },
+      { label: 'Simulazione di Scenari', text: 'Modella scenari di tempo organizzativo — mostrando il costo dell\'allocazione attuale e il guadagno di ritmi riprogettati.' },
+    ],
+    prerequisite: 'ALTER ha identificato il tempo non convertibile. Governarlo come risorsa scarsa diventa inevitabile.',
+  },
+  {
+    title: 'TIME BUDGETING FRAMEWORK',
+    domain: 'time',
+    subtitle: 'Il Tempo come Portfolio',
+    date: 'Q3 2027',
+    status: 'locked',
+    thesis: "Il tempo è la risorsa più strategica in un'organizzazione post-industriale. La maggior parte delle organizzazioni non lo gestisce affatto.",
+    points: [
+      { label: 'Portfolio del Tempo', text: 'Tratta il tempo organizzativo come un budget: allocato, tracciato e ottimizzato — non solo speso.' },
+      { label: 'Non-azione Strategica', text: 'Definisce cosa non fare come competenza organizzativa fondamentale. Anti-burnout strutturale.' },
+    ],
+    prerequisite: "La Governance del Tempo ha esposto il vero costo della cattiva allocazione del tempo nell'organizzazione.",
+  },
+  {
+    title: 'VALUE RE-ATTRIBUTION ENGINE',
+    domain: 'value',
+    subtitle: 'Mappa Contributo vs Riconoscimento',
+    date: 'Q1 2028',
+    status: 'locked',
+    thesis: 'Il divario tra contributo reale e compensazione riconosciuta non è più accettabile.',
+    points: [
+      { label: 'Mappatura del Contributo', text: 'Rende visibile il valore generato rispetto al valore riconosciuto — inclusi tempo non retribuito e contributi fuori contratto.' },
+      { label: 'Motore di Asimmetria', text: 'Quantifica il divario strutturale tra ciò che viene prodotto e ciò che viene remunerato. Forza la conversazione sulla compensazione.' },
+    ],
+    prerequisite: 'La Governance del Tempo ha esposto una frattura: il valore prodotto non è più allineato con lo stipendio ricevuto.',
+  },
+  {
+    title: 'VALUE LEAKAGE MAP',
+    domain: 'value',
+    subtitle: 'Dove Scompare il Valore',
+    date: 'Q3 2028',
+    status: 'locked',
+    thesis: 'Il valore non va semplicemente non riconosciuto — viene attivamente estratto, assorbito o distrutto dal design sistemico.',
+    points: [
+      { label: 'Rilevazione delle Perdite', text: 'Mappa dove il valore organizzativo evapora: estrazioni invisibili, incentivi disallineati, strutture cannibalistiche.' },
+      { label: 'Analisi della Cattura', text: 'Identifica chi cattura valore senza restituirlo — e a quale costo sistemico.' },
+    ],
+    prerequisite: 'La Riattribuzione del Valore ha reso visibile il divario compensativo. La Mappa delle Perdite rivela dove il sistema è strutturalmente autodistruttivo.',
+  },
+  {
+    title: 'ROLE UNBUNDLING SYSTEM',
+    domain: 'identity',
+    subtitle: 'I Ruoli come Configurazioni Temporanee',
+    date: 'Q1 2029',
+    status: 'locked',
+    thesis: "I ruoli sono configurazioni temporanee. L'identità non può essere compressa in una job description.",
+    points: [
+      { label: 'Disaccoppiamento del Ruolo', text: 'Separa l\'essere umano dalla descrizione del lavoro per prevenire il burnout esistenziale. I ruoli diventano modulari, non permanenti.' },
+      { label: 'Competenza Modulare', text: 'Tratta le competenze come moduli componibili — non etichette fisse. Abilita la riconfigurazione fluida senza perdita di identità.' },
+    ],
+    prerequisite: "La Riattribuzione del Valore ha destabilizzato il modello salariale, innescando un collasso silenzioso dell'identità professionale.",
+  },
+  {
+    title: 'CONTRIBUTION PASSPORT',
+    domain: 'identity',
+    subtitle: 'Identità Professionale Portatile',
+    date: 'Q3 2029',
+    status: 'locked',
+    thesis: 'In un mondo post-ruolo, l\'identità deve essere portatile, componibile e indipendente da qualsiasi singola organizzazione.',
+    points: [
+      { label: 'Tracciamento Interfunzionale', text: "Traccia i contributi tra ruoli, team e organizzazioni nel tempo — costruendo un'identità professionale basata sull'evidenza." },
+      { label: 'Anti-precarietà', text: 'Fornisce continuità cognitiva e riconoscimento sociale in contesti lavorativi frammentati o di transizione.' },
+    ],
+    prerequisite: 'La Scomposizione dei Ruoli ha reso visibile la fine delle carriere lineari. L\'identità ha bisogno di una nuova infrastruttura.',
+  },
+  {
+    title: 'INCOME DECOUPLING SIMULATOR',
+    domain: 'income',
+    subtitle: 'Scenari di Reddito Post-Ruolo',
+    date: 'Q1 2030',
+    status: 'locked',
+    thesis: 'La sopravvivenza economica non può dipendere da un singolo ruolo. La sicurezza di base è infrastruttura, non ideologia.',
+    points: [
+      { label: 'Modelli di Reddito Ibrido', text: 'Simula scenari di reddito disaccoppiato — mescolando lavoro, contributo e provviste di base in diverse fasi della vita.' },
+      { label: 'Test di Sostenibilità', text: 'Testa la fattibilità sociale ed economica dei modelli di reddito sotto diverse velocità di transizione e scenari di disruption.' },
+    ],
+    prerequisite: "Il Passaporto dei Contributi ha reso strutturalmente visibile la fine delle carriere lineari. L'instabilità post-ruolo è ora una condizione sistemica.",
+  },
+  {
+    title: 'TRANSITION INCOME FRAMEWORK',
+    domain: 'income',
+    subtitle: 'Ponti, Non Precipizi',
+    date: 'Q3 2030',
+    status: 'locked',
+    thesis: 'La transizione richiede infrastruttura. Non eroismo individuale, non ideologia — ponti ingegnerizzati tra stati lavorativi.',
+    points: [
+      { label: 'Strumenti Istituzionali', text: "Fornisce framework di mitigazione del rischio per governi e grandi organizzazioni che affrontano l'instabilità post-ruolo su scala." },
+      { label: 'Infrastruttura di Transizione', text: 'Progetta meccanismi di continuità che prevengono la frammentazione sociale durante le transizioni economiche strutturali.' },
+    ],
+    prerequisite: "Il Disaccoppiamento del Reddito ha dimostrato i modelli. L'Infrastruttura di Transizione li scala in politiche e pratiche organizzative.",
+  },
+  {
+    title: 'LEARNING-AS-TRANSITION SYSTEM',
+    domain: 'learning',
+    subtitle: 'Apprendimento Continuo Non Punitivo',
+    date: 'Q1 2031',
+    status: 'locked',
+    thesis: "L'apprendimento continuo non può essere coercitivo. Le competenze sono processi, non asset da estrarre sotto minaccia economica.",
+    points: [
+      { label: 'Apprendimento per Fasi di Vita', text: "Lega l'apprendimento alle transizioni di vita piuttosto che alla domanda del datore di lavoro — rendendo lo sviluppo delle competenze volontario, contestuale e continuo." },
+      { label: 'Reskilling Anti-Coercitivo', text: "Pone fine al modello della minaccia di reskilling. Tratta l'evoluzione delle competenze come sviluppo organico, non gestione delle crisi." },
+    ],
+    prerequisite: "L'Infrastruttura di Transizione ha stabilizzato i ponti di reddito. La prossima frattura è cognitiva — apprendimento senza coercizione.",
+  },
+  {
+    title: 'SOCIAL COORDINATION INFRASTRUCTURE',
+    domain: 'social',
+    subtitle: 'Cooperazione Oltre il Lavoro',
+    date: 'Q3 2031',
+    status: 'locked',
+    thesis: 'La società non può usare il lavoro come meccanismo di legame primario. Il coordinamento post-lavoro richiede nuova infrastruttura — non nostalgia.',
+    points: [
+      { label: 'Cooperazione Post-Lavoro', text: 'Progetta sistemi di cooperazione sociale che non dipendono dall\'impiego condiviso — abilitando contributo, reciprocità e governance.' },
+      { label: 'Governance Distribuita', text: 'Costruisce framework di contributo distribuito e modelli di governance per comunità che navigano transizioni economiche strutturali.' },
+    ],
+    prerequisite: "L'Apprendimento-come-Transizione ha dissolto il modello cognitivo coercitivo. La frontiera finale è il coordinamento sociale su scala.",
+  },
+] : [
+  {
+    title: 'ALTER',
+    domain: 'work',
+    subtitle: 'Operative Digital Twin',
+    date: 'ACTIVE',
+    status: 'active',
+    thesis: 'The fundamental unit of organization is not the role. It is the cognitive task.',
+    points: [
+      { label: 'Reality Mapping', text: 'Maps real workflows, atomized tasks (10–15 min), dependencies and decision points. Separates actual work from organizational narrative.' },
+      { label: 'Task Ontology', text: 'Classifies every task by cognitive axes: repetitiveness, judgment load, relational intensity, creativity. This is the defensible IP.' },
+      { label: 'Delegability Engine', text: 'Evaluates which cognitive component is replaceable, at what cost and risk. Exposes historical inefficiencies. Protects management from bad tech decisions.' },
+      { label: 'Workflow Recomposition', text: 'Dismantles workflows into atomic tasks and reassigns them (human, AI, hybrid). Output: a new Operating Model and a 12–36 month Transition Plan.' },
+    ],
+    cta: 'See How It Works',
+    prerequisite: null,
+  },
+  {
+    title: 'FRICTION INDEX',
+    domain: 'work',
+    subtitle: 'Cognitive Energy Loss Map',
+    date: 'Q3 2026',
+    status: 'coming-soon',
+    thesis: 'Where work stalls, energy leaks, and people compensate with stress — this is measurable.',
+    points: [
+      { label: 'Friction Detection', text: 'Identifies where work breaks down: repeated handoffs, unresolved ambiguities, compensatory overload.' },
+      { label: 'Energy Loss Map', text: 'Quantifies cognitive energy lost to non-productive friction. Makes the invisible cost of dysfunction visible.' },
+    ],
+    prerequisite: 'ALTER has mapped the real workflow. Friction Index reveals where it silently destroys value.',
+  },
+  {
+    title: 'TIME GOVERNANCE SYSTEM',
+    domain: 'time',
+    subtitle: 'Time Quality Allocation',
+    date: 'Q1 2027',
+    status: 'locked',
+    thesis: 'Not all working time is equal. Governing time as a primary resource is the next frontier.',
+    points: [
+      { label: 'Time Allocation', text: 'Redistributes time by quality of cognitive output, not by role or seniority.' },
+      { label: 'Regenerative Protection', text: 'Structurally reduces non-convertible time and protects regenerative capacity from erosion.' },
+      { label: 'Scenario Simulation', text: 'Models organizational time scenarios — showing the cost of current allocation and the gain of redesigned rhythms.' },
+    ],
+    prerequisite: 'ALTER has identified non-convertible time. Governing it as a scarce resource becomes unavoidable.',
+  },
+  {
+    title: 'TIME BUDGETING FRAMEWORK',
+    domain: 'time',
+    subtitle: 'Time as a Portfolio',
+    date: 'Q3 2027',
+    status: 'locked',
+    thesis: 'Time is the most strategic resource in a post-industrial organization. Most organizations do not manage it at all.',
+    points: [
+      { label: 'Time Portfolio', text: 'Treats organizational time as a budget: allocated, tracked, and optimized — not just spent.' },
+      { label: 'Strategic Non-action', text: 'Defines what not to do as a core organizational competence. Structural anti-burnout.' },
+    ],
+    prerequisite: 'Time Governance has exposed the true cost of time misallocation across the organization.',
+  },
+  {
+    title: 'VALUE RE-ATTRIBUTION ENGINE',
+    domain: 'value',
+    subtitle: 'Contribution vs Recognition Map',
+    date: 'Q1 2028',
+    status: 'locked',
+    thesis: 'The gap between real contribution and recognized compensation is no longer acceptable.',
+    points: [
+      { label: 'Contribution Mapping', text: 'Makes visible the value generated vs. the value recognized — including unpaid time and off-contract contributions.' },
+      { label: 'Asymmetry Engine', text: 'Quantifies the structural gap between what is produced and what is remunerated. Forces the compensation conversation.' },
+    ],
+    prerequisite: 'Time Governance has exposed a fracture: value produced no longer aligns with salary received.',
+  },
+  {
+    title: 'VALUE LEAKAGE MAP',
+    domain: 'value',
+    subtitle: 'Where Value Disappears',
+    date: 'Q3 2028',
+    status: 'locked',
+    thesis: 'Value does not just go unrecognized — it is actively extracted, absorbed, or destroyed by systemic design.',
+    points: [
+      { label: 'Leakage Detection', text: 'Maps where organizational value evaporates: invisible extractions, misaligned incentives, cannibalistic structures.' },
+      { label: 'Capture Analysis', text: 'Identifies who captures value without return — and at what systemic cost.' },
+    ],
+    prerequisite: 'Value Re-attribution has made the compensation gap visible. Value Leakage reveals where the system is structurally self-destructive.',
+  },
+  {
+    title: 'ROLE UNBUNDLING SYSTEM',
+    domain: 'identity',
+    subtitle: 'Roles as Temporary Configurations',
+    date: 'Q1 2029',
+    status: 'locked',
+    thesis: 'Roles are temporary configurations. Identity cannot be compressed into a job description.',
+    points: [
+      { label: 'Role Decoupling', text: 'Separates the human being from the job description to prevent existential burnout. Roles become modular, not permanent.' },
+      { label: 'Modular Competence', text: 'Treats skills as composable modules — not fixed labels. Enables fluid reconfiguration without identity loss.' },
+    ],
+    prerequisite: 'Value Re-attribution has destabilized the salary model, triggering a silent collapse of professional identity.',
+  },
+  {
+    title: 'CONTRIBUTION PASSPORT',
+    domain: 'identity',
+    subtitle: 'Portable Professional Identity',
+    date: 'Q3 2029',
+    status: 'locked',
+    thesis: 'In a post-role world, identity must be portable, composable, and independent from any single organization.',
+    points: [
+      { label: 'Cross-functional Tracking', text: 'Tracks contributions across roles, teams, and organizations over time — building an evidence-based professional identity.' },
+      { label: 'Anti-precarity', text: 'Provides cognitive continuity and social recognition in fragmented or transitional work contexts.' },
+    ],
+    prerequisite: 'Role Unbundling has made the end of linear careers visible. Identity needs a new infrastructure.',
+  },
+  {
+    title: 'INCOME DECOUPLING SIMULATOR',
+    domain: 'income',
+    subtitle: 'Post-Role Income Scenarios',
+    date: 'Q1 2030',
+    status: 'locked',
+    thesis: 'Economic survival cannot depend on a single role. Basic security is infrastructure, not ideology.',
+    points: [
+      { label: 'Hybrid Income Models', text: 'Simulates scenarios of decoupled income — blending labour, contribution and basic provisions across different life phases.' },
+      { label: 'Sustainability Testing', text: 'Tests social and economic viability of income models under different transition speeds and disruption scenarios.' },
+    ],
+    prerequisite: 'Contribution Passport has made the end of linear careers structurally visible. Post-role instability is now a systemic condition.',
+  },
+  {
+    title: 'TRANSITION INCOME FRAMEWORK',
+    domain: 'income',
+    subtitle: 'Bridges, Not Cliffs',
+    date: 'Q3 2030',
+    status: 'locked',
+    thesis: 'Transition requires infrastructure. Not individual heroism, not ideology — engineered bridges between labour states.',
+    points: [
+      { label: 'Institutional Tools', text: 'Provides risk-mitigation frameworks for governments and large organizations facing post-role instability at scale.' },
+      { label: 'Transition Infrastructure', text: 'Designs continuity mechanisms that prevent social fragmentation during structural economic shifts.' },
+    ],
+    prerequisite: 'Income Decoupling has proven the models. Transition Infrastructure scales them into policy and organizational practice.',
+  },
+  {
+    title: 'LEARNING-AS-TRANSITION SYSTEM',
+    domain: 'learning',
+    subtitle: 'Non-Punitive Continuous Learning',
+    date: 'Q1 2031',
+    status: 'locked',
+    thesis: 'Continuous learning cannot be coercive. Skills are processes, not assets to be extracted under economic threat.',
+    points: [
+      { label: 'Life-Phase Learning', text: 'Ties learning to life transitions rather than employer demand — making skill development voluntary, contextual, and continuous.' },
+      { label: 'Anti-Coercive Reskilling', text: 'Ends the reskilling threat model. Treats skill evolution as organic development, not crisis management.' },
+    ],
+    prerequisite: 'Transition Infrastructure has stabilized income bridges. The next fracture is cognitive — learning without coercion.',
+  },
+  {
+    title: 'SOCIAL COORDINATION INFRASTRUCTURE',
+    domain: 'social',
+    subtitle: 'Cooperation Beyond Labour',
+    date: 'Q3 2031',
+    status: 'locked',
+    thesis: 'Society cannot use labour as its primary binding mechanism. Post-labour coordination requires new infrastructure — not nostalgia.',
+    points: [
+      { label: 'Post-Labour Cooperation', text: 'Designs systems for social cooperation that do not depend on shared employment — enabling contribution, reciprocity, and governance.' },
+      { label: 'Distributed Governance', text: 'Builds distributed contribution frameworks and governance models for communities navigating structural economic transitions.' },
+    ],
+    prerequisite: 'Learning-as-Transition has dissolved the coercive knowledge model. The final frontier is social coordination at scale.',
+  },
+];

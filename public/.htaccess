@@ -1,0 +1,17 @@
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
+# Video MIME type
+AddType video/mp4 .mp4
+
+# Cache assets a lungo termine
+<FilesMatch "\.(js|css|woff2|png|jpg|jpeg|svg|webp)$">
+  Header set Cache-Control "max-age=31536000, immutable"
+</FilesMatch>
+
+# Cache HTML breve (per aggiornamenti)
+<FilesMatch "\.html$">
+  Header set Cache-Control "max-age=0, no-cache"
+</FilesMatch>
