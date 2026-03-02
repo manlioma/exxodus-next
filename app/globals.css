@@ -1,5 +1,5 @@
 @import url('https://use.typekit.net/oqi5nwl.css');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
 @import "tailwindcss";
 
 html {
@@ -13,6 +13,9 @@ body {
   padding: 0;
   background: #0A1628;
   color: #FFF9C4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .font-mono {

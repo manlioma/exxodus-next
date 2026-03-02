@@ -38,46 +38,52 @@ const DOMAINS = {
 const LiquidImage = ({ src, alt, className = "", overlay = true }: { src: string, alt: string, className?: string, overlay?: boolean }) => {
   const filterId = useId().replace(/:/g, "");
 
-  // Safari clips CSS filter output to the element bounding box even with overflow:visible.
-  // Fix: apply the filter to a buffer div that extends 24px beyond the visible area,
-  // then clip with overflow:hidden on the outer wrapper. Displaced edge pixels come
-  // from the extra image content in the buffer zone, not from empty space.
-  const BUFFER = 24; // px — must be > feDisplacementMap scale/2 (scale=20 → ±10px)
+  // Safari tiles CSS filter rendering at ~512px boundaries, breaking
+  // feTurbulence spatial continuity → visible seams across the image.
+  // Detect Safari (not Chrome/Android) and skip the SVG filter entirely.
+  const [isSafari, setIsSafari] = useState(false);
+  useEffect(() => {
+    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+  }, []);
+
+  // On non-Safari: apply filter to a buffer div that extends 24px beyond
+  // the visible area so displaced edge pixels draw from real image content.
+  const BUFFER = 24;
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <svg className="absolute w-0 h-0">
-        <filter
-          id={`liquid-${filterId}`}
-          x="0%" y="0%" width="100%" height="100%"
-          filterUnits="objectBoundingBox"
-        >
-          <feTurbulence type="fractalNoise" baseFrequency="0.003 0.003" numOctaves="1" result="warp">
-            <animate
-              attributeName="baseFrequency"
-              values="0.003 0.003;0.006 0.007;0.003 0.003"
-              dur="15s"
-              repeatCount="indefinite"
-              calcMode="spline"
-              keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+      {!isSafari && (
+        <svg className="absolute w-0 h-0">
+          <filter
+            id={`liquid-${filterId}`}
+            x="0%" y="0%" width="100%" height="100%"
+            filterUnits="objectBoundingBox"
+          >
+            <feTurbulence type="fractalNoise" baseFrequency="0.003 0.003" numOctaves="1" result="warp">
+              <animate
+                attributeName="baseFrequency"
+                values="0.003 0.003;0.006 0.007;0.003 0.003"
+                dur="15s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+              />
+            </feTurbulence>
+            <feDisplacementMap
+              xChannelSelector="R"
+              yChannelSelector="G"
+              scale="20"
+              in="SourceGraphic"
+              in2="warp"
             />
-          </feTurbulence>
-          <feDisplacementMap
-            xChannelSelector="R"
-            yChannelSelector="G"
-            scale="20"
-            in="SourceGraphic"
-            in2="warp"
-          />
-        </filter>
-      </svg>
-      {/* Buffer wrapper: extends BUFFER px beyond visible area so displaced
-          edge pixels draw from real image content, not empty space */}
+          </filter>
+        </svg>
+      )}
       <div
         className="absolute"
         style={{
-          inset: `-${BUFFER}px`,
-          filter: `url(#liquid-${filterId})`,
+          inset: isSafari ? '0' : `-${BUFFER}px`,
+          ...(!isSafari && { filter: `url(#liquid-${filterId})` }),
         }}
       >
         <img
