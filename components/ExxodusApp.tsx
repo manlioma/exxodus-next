@@ -65,7 +65,7 @@ const LiquidImage = ({ src, alt, className = "", overlay = true }: { src: string
           />
         </filter>
       </svg>
-      <div className="w-full h-full" style={{ filter: `url(#liquid-${filterId})` }}>
+      <div className="absolute inset-0" style={{ filter: `url(#liquid-${filterId})` }}>
         <img
           src={src}
           alt={alt}
@@ -130,7 +130,7 @@ const OrganicBlob = ({ color, size, top, left, delay = 0, followMouse = false, m
 };
 
 const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string }) => (
-  <section id={id} className={`min-h-screen flex flex-col justify-center px-6 md:px-24 lg:px-48 py-32 relative overflow-hidden ${className}`}>
+  <section id={id} className={`min-h-screen flex flex-col justify-center px-6 md:px-24 lg:px-48 py-32 relative ${className}`}>
     <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
     {children}
   </section>
